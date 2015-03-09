@@ -46,17 +46,23 @@ static interface CheckMe {
 
 // some exception throwing utility class
 static class ImportantUtility {
-    public static String dontIgnoreMeeeee(Integer i) throws IOException, GeneralSecurityException, NoSuchMethodException {
+    public static String dontIgnoreMeeeee(Integer i)
+        throws IOException, GeneralSecurityException, NoSuchMethodException {
         /* some important logic ... */
     }
 }
 
-// Unchecker lets you do this
+/* 
+ * Unchecker lets you do this
+ * Unchecker#uncheckedGet returns a throwing supplier's result
+ *          (wrapping checked in RuntimeExceptions by default)
+ * Unchecker#uncheck transforms a throwing lambda/method into a unchecked one
+ */
 List<String> uncheckThrower(CheckMe object) {
-    return uncheckedGet(() -> { // Unchecker#uncheckedGet returns a throwing supplier's result (wrapping checked in RuntimeExceptions by default)
+    return uncheckedGet(() -> {
         object.youMustHandleMyErrorCases();
         return object.atLeastWriteThrowsAllOverYourCode().stream()
-            .map(uncheck(ImportantUtility::dontIgnoreMeeeee)) // Unchecker#uncheck transforms a throwing lambda/method into a unchecked one
+            .map(uncheck(ImportantUtility::dontIgnoreMeeeee))
             .collect(toList());
     });
 }

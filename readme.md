@@ -38,20 +38,6 @@ Utility methods to wrap the propagation of a possible checked exception in an un
 Particularly useful in making fluent functional code involving checked exceptions not a horror to behold.
 
 ```java
-// some Exception throwing instance
-static interface CheckMe {
-    void youMustHandleMyErrorCases() throws Exception;
-    List<Integer> atLeastWriteThrowsAllOverYourCode() throws Throwable;
-}
-
-// some exception throwing utility class
-static class ImportantUtility {
-    public static String dontIgnoreMeeeee(Integer i)
-        throws IOException, GeneralSecurityException, NoSuchMethodException {
-        /* some important logic ... */
-    }
-}
-
 /*
  * Unchecker lets you do this
  * Unchecker#uncheckedGet returns a throwing supplier's result
@@ -87,6 +73,20 @@ List<String> uncheckThrowerManual(CheckMe object) {
     }
     catch (Throwable throwable) {
         throw new RuntimeException(throwable);
+    }
+}
+
+// some Exception throwing instance
+static interface CheckMe {
+    void youMustHandleMyErrorCases() throws Exception;
+    List<Integer> atLeastWriteThrowsAllOverYourCode() throws Throwable;
+}
+
+// some exception throwing utility class
+static class ImportantUtility {
+    public static String dontIgnoreMeeeee(Integer i)
+        throws IOException, GeneralSecurityException, NoSuchMethodException {
+        /* some important logic ... */
     }
 }
 ```

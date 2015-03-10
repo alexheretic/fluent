@@ -1,7 +1,7 @@
 Fluent
 ------
 
-alexh.fluent is an ultra-lightweight library to aid fluent coding in Java 8 onwards
+Fluent is an ultra-lightweight library to aid fluent coding in Java 8 onwards
 
 ### Map Building
 Classes to aid Map building in a declarative way. A bit nicer than the anonymous sub-class with initializer block approach, don't you think?
@@ -92,7 +92,7 @@ static class ImportantUtility {
 ```
 
 
-alexh.fluent is licensed under the [Apache 2.0 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
+Fluent is licensed under the [Apache 2.0 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 ### Releases
 

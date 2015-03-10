@@ -8,6 +8,17 @@
   <artifactId>fluent</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>Java 8 common library for fluent coding</description>
+  <url>https://github.com/alexheretic/fluent</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -69,7 +80,39 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <additionalparam>-Xdoclint:none</additionalparam>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <scm>
+    <connection>scm:git:git@github.com/alexheretic/fluent.git</connection>
+    <developerConnection>scm:git:git@github.com/alexheretic/fluent.git</developerConnection>
+    <url>git@github.com/alexheretic/fluent.git</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Alex Butler</name>
+      <email>alexheretic@gmail.com</email>
+      <organization>n/a</organization>
+      <organizationUrl>https://github.com/alexheretic</organizationUrl>
+    </developer>
+  </developers>
 
 </project>

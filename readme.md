@@ -1,7 +1,7 @@
 Fluent
 ------
 
-alexh.fluent is an ultra-lightweight library to aid more fluent coding in Java 8 onwards
+alexh.fluent is an ultra-lightweight library to aid fluent coding in Java 8 onwards
 
 ### Map Building
 Classes to aid Map building in a declarative way. A bit nicer than the anonymous sub-class with initializer block approach, don't you think?
@@ -52,7 +52,7 @@ static class ImportantUtility {
     }
 }
 
-/* 
+/*
  * Unchecker lets you do this
  * Unchecker#uncheckedGet returns a throwing supplier's result
  *          (wrapping checked in RuntimeExceptions by default)

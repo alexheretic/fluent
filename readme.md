@@ -1,7 +1,7 @@
 Fluent
 ------
 
-Fluent is an ultra-lightweight library to aid fluent coding in Java 8 onwards
+Fluent is an ultra-lightweight Java library to aid fluent coding in Java 8 onwards
 
 ### Map Building
 Classes to aid Map building in a declarative way. A bit nicer than the anonymous sub-class with initializer block approach, don't you think?

@@ -38,7 +38,7 @@ Utility methods to wrap the propagation of a possible checked exception in an un
 Particularly useful in making fluent functional code involving checked exceptions not a horror to behold.
 
 ```java
-// in short Unchecker lets you do this
+// in short Unchecker#unchecked lets you do this
 unchecked(() -> methodThatThrowsACheckedException());
 
 // which is equivalent to
@@ -55,7 +55,6 @@ catch (Throwable t) {
 
 ```java
 /*
- * Unchecker lets you do this
  * Unchecker#uncheckedGet returns a throwing supplier's result
  *          (wrapping checked in RuntimeExceptions by default)
  * Unchecker#uncheck transforms a throwing lambda/method into a unchecked one

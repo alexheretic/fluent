@@ -111,4 +111,12 @@ Fluent is licensed under the [Apache 2.0 licence](http://www.apache.org/licenses
 
 ### Releases
 
-1.0 is the current latest release. Requiring JDK 1.8 or later.
+1.0 is the current latest release, available at maven central. Requiring JDK 1.8 or later.
+
+```
+<dependency>
+  <groupId>com.github.alexheretic</groupId>
+  <artifactId>fluent</artifactId>
+  <version>1.0</version>
+</dependency>
+```

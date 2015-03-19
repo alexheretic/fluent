@@ -31,28 +31,28 @@ import java.util.Comparator;
 public class Fluent {
 
     /** Fluent extension of java.util.Map */
-    public static interface Map<K, V, Self extends Map<K, V, Self>> extends java.util.Map<K, V> {
+    public static interface Map<K, V> extends java.util.Map<K, V> {
 
         /**
          * @see java.util.Map#put(K, V)
          * @return self-reference
          */
-        default Self append(K key, V val) {
+        default Map<K, V> append(K key, V val) {
             put(key, val);
-            return (Self) this;
+            return this;
         }
 
         /**
          * @see java.util.Map#putAll(java.util.Map)
          * @return self-reference
          */
-        default Self appendAll(java.util.Map<? extends K, ? extends V> map) {
+        default Map<K, V> appendAll(java.util.Map<? extends K, ? extends V> map) {
             putAll(map);
-            return (Self) this;
+            return this;
         }
     }
 
-    public static class HashMap<K, V> extends java.util.HashMap<K, V> implements Fluent.Map<K, V, HashMap<K, V>> {
+    public static class HashMap<K, V> extends java.util.HashMap<K, V> implements Fluent.Map<K, V> {
         public HashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
@@ -65,7 +65,7 @@ public class Fluent {
         public HashMap() {}
     }
 
-    public static class LinkedHashMap<K, V> extends java.util.LinkedHashMap<K, V> implements Fluent.Map<K, V, LinkedHashMap<K, V>> {
+    public static class LinkedHashMap<K, V> extends java.util.LinkedHashMap<K, V> implements Fluent.Map<K, V> {
         public LinkedHashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
@@ -78,7 +78,7 @@ public class Fluent {
         public LinkedHashMap() {}
     }
 
-    public static class IdentityHashMap<K, V> extends java.util.IdentityHashMap<K, V> implements Fluent.Map<K, V, IdentityHashMap<K, V>> {
+    public static class IdentityHashMap<K, V> extends java.util.IdentityHashMap<K, V> implements Fluent.Map<K, V> {
         public IdentityHashMap() {}
         public IdentityHashMap(int expectedMaxSize) {
             super(expectedMaxSize);
@@ -88,7 +88,7 @@ public class Fluent {
         }
     }
 
-    public static class EnumMap<K extends Enum<K>, V> extends java.util.EnumMap<K, V> implements Fluent.Map<K, V, EnumMap<K, V>> {
+    public static class EnumMap<K extends Enum<K>, V> extends java.util.EnumMap<K, V> implements Fluent.Map<K, V> {
         public EnumMap(Class<K> keyType) {
             super(keyType);
         }
@@ -100,7 +100,7 @@ public class Fluent {
         }
     }
 
-    public static class WeakHashMap<K, V> extends java.util.WeakHashMap<K, V> implements Fluent.Map<K, V, WeakHashMap<K, V>> {
+    public static class WeakHashMap<K, V> extends java.util.WeakHashMap<K, V> implements Fluent.Map<K, V> {
         public WeakHashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
@@ -113,7 +113,7 @@ public class Fluent {
         }
     }
     
-    public static class ConcurrentSkipListMap<K, V> extends java.util.concurrent.ConcurrentSkipListMap<K, V> implements Fluent.Map<K, V, ConcurrentSkipListMap<K, V>> {
+    public static class ConcurrentSkipListMap<K, V> extends java.util.concurrent.ConcurrentSkipListMap<K, V> implements Fluent.Map<K, V> {
         public ConcurrentSkipListMap() {}
         public ConcurrentSkipListMap(Comparator<? super K> comparator) {
             super(comparator);
@@ -126,7 +126,7 @@ public class Fluent {
         }
     }
     
-    public static class ConcurrentHashMap<K, V> extends java.util.concurrent.ConcurrentHashMap<K, V> implements Fluent.Map<K, V, ConcurrentHashMap<K, V>> {
+    public static class ConcurrentHashMap<K, V> extends java.util.concurrent.ConcurrentHashMap<K, V> implements Fluent.Map<K, V> {
         public ConcurrentHashMap() {}
         public ConcurrentHashMap(int initialCapacity) {
             super(initialCapacity);

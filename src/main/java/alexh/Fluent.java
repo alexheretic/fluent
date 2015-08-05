@@ -31,7 +31,7 @@ import java.util.Comparator;
 public class Fluent {
 
     /** Fluent extension of java.util.Map */
-    public static interface Map<K, V> extends java.util.Map<K, V> {
+    public interface Map<K, V> extends java.util.Map<K, V> {
 
         /**
          * @see java.util.Map#put(K, V)
@@ -49,6 +49,16 @@ public class Fluent {
         default Map<K, V> appendAll(java.util.Map<? extends K, ? extends V> map) {
             putAll(map);
             return this;
+        }
+
+        /**
+         * Equivalent to append(key, value) of the input entry
+         * @see #append(K, V)
+         * @param entry map entry
+         * @return self-reference
+         */
+        default Map<K, V> append(Map.Entry<? extends K, ? extends V> entry) {
+            return append(entry.getKey(), entry.getValue());
         }
     }
 

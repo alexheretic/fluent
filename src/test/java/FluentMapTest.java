@@ -1,10 +1,7 @@
 import alexh.Fluent;
 import org.junit.Test;
 import java.time.LocalDate;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,15 +31,13 @@ public class FluentMapTest {
                 .append(Inner.KEY2, "foo")
                 .append(Inner.KEY3, new Fluent.LinkedHashMap<>()
                     .append("a date", LocalDate.of(2015, 2, 15))
-                    .append("a string", "hello there")
-                )
-            )
+                    .append(new AbstractMap.SimpleEntry<>("a string", "hello there"))))
             .append("another key?", "oh yeah");
 
         assertThat(fluent, equalTo(nonFluent));
     }
 
-    static enum Inner {
+    enum Inner {
         KEY1, KEY2, KEY3
     }
 }

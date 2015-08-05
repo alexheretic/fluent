@@ -1,5 +1,6 @@
 import alexh.Fluent;
 import org.junit.Test;
+import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -29,7 +30,7 @@ public class FluentSanityTest {
         testFluentMap().withFluent(Fluent.ConcurrentSkipListMap::new).withExpectedSuperclass(java.util.concurrent.ConcurrentSkipListMap.class).run();
     }
 
-    static enum Example {
+    enum Example {
         ONE, TWO, THREE, FOUR, FIVE, SIX
     }
 
@@ -74,6 +75,10 @@ public class FluentSanityTest {
             final Fluent.Map allAppendedFluent = fluent.appendAll(map);
             assertThat(allAppendedFluent, sameInstance(fluent));
             assertThat(fluent.size(), is(3));
+
+            final Fluent.Map entryAppendedFluent = fluent.append(new AbstractMap.SimpleEntry<>(keySupplier.get(), "val4"));
+            assertThat(entryAppendedFluent, sameInstance(fluent));
+            assertThat(fluent.size(), is(4));
         }
     }
 }

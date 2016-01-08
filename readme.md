@@ -1,5 +1,6 @@
 Fluent
 ------
+[![Build Status](https://travis-ci.org/alexheretic/fluent.svg?branch=master)](https://travis-ci.org/alexheretic/fluent)
 
 Fluent is an ultra-lightweight Java library to aid fluent coding in Java 8 onwards
 

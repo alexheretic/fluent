@@ -1,6 +1,7 @@
 Fluent
 ------
 [![Build Status](https://travis-ci.org/alexheretic/fluent.svg?branch=master)](https://travis-ci.org/alexheretic/fluent)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.alexheretic/fluent.svg)](http://mvnrepository.com/artifact/com.github.alexheretic/fluent)
 
 Fluent is an ultra-lightweight Java library to aid fluent coding in Java 8 onwards
 

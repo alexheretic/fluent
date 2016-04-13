@@ -19,20 +19,16 @@ Map<String, String> example = new Fluent.LinkedHashMap<String, String>()
 Map<String, Object> users = new Fluent.HashMap<String, Object>()
     .append("David", new Fluent.HashMap<>()
         .append("customers", asList(
-                new Fluent.HashMap<>()
-                    .append("name", "Darrel")
-                    .append("age", 33),
-                new Fluent.HashMap<>()
-                    .append("name", "John")
-                    .append("age", 29)
-            )
-        )
-        .append("keywords", asList("word1", "word2"))
-    )
+            new Fluent.HashMap<>()
+                .append("name", "Darrel")
+                .append("age", 33),
+            new Fluent.HashMap<>()
+                .append("name", "John")
+                .append("age", 29)))
+        .append("keywords", asList("word1", "word2")))
     .append("Karen", new Fluent.HashMap<>()
         .append("customers", emptyList())
-        .append("keywords", asList("word33"))
-    );
+        .append("keywords", asList("word33")));
 ```
 
 ### Checked Exception Handling With Functional Wrapping

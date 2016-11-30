@@ -29,6 +29,13 @@ Map<String, Object> users = new Fluent.HashMap<String, Object>()
     .append("Karen", new Fluent.HashMap<>()
         .append("customers", emptyList())
         .append("keywords", asList("word33")));
+
+// fluent immutable maps
+Map immutable = new Fluent.HashMap<>()
+    .append("one", 1)
+    .append("two", 2)
+    .append("three", 3)
+    .unmodifiable();
 ```
 
 ### Checked Exception Handling With Functional Wrapping

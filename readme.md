@@ -128,3 +128,11 @@ Fluent is licensed under the [Apache 2.0 licence](http://www.apache.org/licenses
   <version>2.0</version>
 </dependency>
 ```
+
+### Changelog
+Release 2.x
+* Add Fluent.Map#unmodifiable()
+
+Release 1.x
+* Fluent.Map classes
+* Unchecker checked exception utility

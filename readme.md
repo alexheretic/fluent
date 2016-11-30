@@ -16,7 +16,7 @@ Map<String, String> example = new Fluent.LinkedHashMap<String, String>()
     .appendAll(someMap);
 
 // nested structures declared all at once
-Map<String, Object> users = new Fluent.HashMap<String, Object>()
+Map users = new Fluent.HashMap<>()
     .append("David", new Fluent.HashMap<>()
         .append("customers", asList(
             new Fluent.HashMap<>()
@@ -58,22 +58,24 @@ catch (Throwable t) {
 }
 ```
 
+Dealing with checked exception mad code in lambdas is messy, take for example these methods
 ```java
-/*
- * Unchecker#uncheckedGet returns a throwing supplier's result
- *          (wrapping checked in RuntimeExceptions by default)
- * Unchecker#uncheck transforms a throwing lambda/method into a unchecked one
- */
-List<String> uncheckThrower(CheckMe object) {
-    return uncheckedGet(() -> {
-        object.youMustHandleMyErrorCases();
-        return object.atLeastWriteThrowsAllOverYourCode().stream()
-            .map(uncheck(ImportantUtility::dontIgnoreMeeeee))
-            .collect(toList());
-    });
+// some Exception throwing instance
+interface CheckMe {
+    void youMustHandleMyErrorCases() throws Exception;
+    List<Integer> atLeastWriteThrowsAllOverYourCode() throws Throwable;
 }
 
-// instead of this...
+// some exception throwing utility class
+class ImportantUtility {
+    public static String dontIgnoreMeeeee(Integer i)
+        throws IOException, GeneralSecurityException, NoSuchMethodException {
+        /* some important logic ... */
+    }
+}
+```
+This logic could cause the following mess in simple handler code
+```java
 List<String> uncheckThrowerManual(CheckMe object) {
     try {
         object.youMustHandleMyErrorCases();
@@ -95,22 +97,23 @@ List<String> uncheckThrowerManual(CheckMe object) {
         throw new RuntimeException(throwable);
     }
 }
-
-// some Exception throwing instance
-static interface CheckMe {
-    void youMustHandleMyErrorCases() throws Exception;
-    List<Integer> atLeastWriteThrowsAllOverYourCode() throws Throwable;
-}
-
-// some exception throwing utility class
-static class ImportantUtility {
-    public static String dontIgnoreMeeeee(Integer i)
-        throws IOException, GeneralSecurityException, NoSuchMethodException {
-        /* some important logic ... */
-    }
+```
+We can clean this up with Java 8 & Fluent
+```java
+/*
+ * Unchecker#uncheckedGet returns a throwing supplier's result
+ *          (wrapping checked in RuntimeExceptions by default)
+ * Unchecker#uncheck transforms a throwing lambda/method into a unchecked one
+ */
+List<String> uncheckThrower(CheckMe object) {
+    return uncheckedGet(() -> {
+        object.youMustHandleMyErrorCases();
+        return object.atLeastWriteThrowsAllOverYourCode().stream()
+            .map(uncheck(ImportantUtility::dontIgnoreMeeeee))
+            .collect(toList());
+    });
 }
 ```
-
 
 Fluent is licensed under the [Apache 2.0 licence](http://www.apache.org/licenses/LICENSE-2.0.html).
 

@@ -1,13 +1,11 @@
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 import alexh.Fluent;
-import org.junit.Test;
 import java.util.AbstractMap;
 import java.util.Iterator;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import static java.lang.String.format;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.Test;
 
 public class FluentSanityTest {
 
@@ -57,28 +55,30 @@ public class FluentSanityTest {
             return this;
         }
 
+        @SuppressWarnings("unchecked")
         void run() {
             final T fluent = supplier.get();
             fluent.clear();
 
-            assertThat(format("Unexpected fluent inheritance %s is not a %s", fluent.getClass().getName(), superclass.getName()),
-                fluent, instanceOf(superclass));
+            assertThat(fluent)
+                .as(format("Unexpected fluent inheritance %s is not a %s", fluent.getClass().getName(), superclass.getName()))
+                .isInstanceOf(superclass);
 
             final Fluent.Map appendedFluent = fluent.append(keySupplier.get(), "val");
-            assertThat(appendedFluent, sameInstance(fluent));
-            assertThat(fluent.size(), is(1));
+            assertThat(appendedFluent).isSameAs(fluent);
+            assertThat(fluent).hasSize(1);
 
             java.util.Map<Object, Object> map = new java.util.HashMap<>();
             map.put(keySupplier.get(), "val2");
             map.put(keySupplier.get(), "val3");
 
             final Fluent.Map allAppendedFluent = fluent.appendAll(map);
-            assertThat(allAppendedFluent, sameInstance(fluent));
-            assertThat(fluent.size(), is(3));
+            assertThat(allAppendedFluent).isSameAs(fluent);
+            assertThat(fluent).hasSize(3);
 
             final Fluent.Map entryAppendedFluent = fluent.append(new AbstractMap.SimpleEntry<>(keySupplier.get(), "val4"));
-            assertThat(entryAppendedFluent, sameInstance(fluent));
-            assertThat(fluent.size(), is(4));
+            assertThat(entryAppendedFluent).isSameAs(fluent);
+            assertThat(fluent).hasSize(4);
         }
     }
 }

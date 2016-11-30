@@ -15,6 +15,7 @@
  */
 package alexh;
 
+import static java.util.Collections.unmodifiableMap;
 import java.util.Comparator;
 
 /**
@@ -59,6 +60,24 @@ public class Fluent {
          */
         default Map<K, V> append(Map.Entry<? extends K, ? extends V> entry) {
             return append(entry.getKey(), entry.getValue());
+        }
+
+        /**
+         * Returns an unmodifiable view of this map. Best used at the end of fluent construction
+         * thereby providing an effectively immutable map (as the backing mutable map is unreachable).
+         * For example:
+         * <pre>{@code
+         *   Map<String, Integer> immutable = new Fluent.HashMap<String, Integer>()
+         *       .append("one", 1)
+         *       .append("two", 2)
+         *       .append("three", 3)
+         *       .unmodifiable();
+         * }</pre>
+         * See java.util.Collections#unmodifiableMap(Map)
+         * @return an unmodifiable view of this map
+         */
+        default java.util.Map<K, V> unmodifiable() {
+            return unmodifiableMap(this);
         }
     }
 

@@ -1,10 +1,9 @@
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import alexh.Fluent;
-import org.junit.Test;
 import java.time.LocalDate;
 import java.util.*;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.Test;
 
 public class FluentMapTest {
 
@@ -34,7 +33,23 @@ public class FluentMapTest {
                     .append(new AbstractMap.SimpleEntry<>("a string", "hello there"))))
             .append("another key?", "oh yeah");
 
-        assertThat(fluent, equalTo(nonFluent));
+        assertThat(fluent).isEqualTo(nonFluent);
+    }
+
+    @Test
+    public void fluentUnmodifiable() {
+        Map<String, Integer> immutable = new Fluent.ConcurrentHashMap<String, Integer>(3)
+            .append("one", 1)
+            .append("two", 2)
+            .append("three", 3)
+            .unmodifiable();
+
+        assertThat(immutable).hasSize(3);
+
+        assertThatThrownBy(() -> immutable.put("four", 4))
+            .isInstanceOf(RuntimeException.class);
+
+        assertThat(immutable).hasSize(3);
     }
 
     enum Inner {
